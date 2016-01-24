@@ -52,11 +52,16 @@
   <ItemGroup>
     <Compile Include="CounterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WordsCounterViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CounterLib\CounterLib.csproj">
       <Project>{6ab7fde6-dcda-460b-af4f-34bd64a5ebd8}</Project>
       <Name>CounterLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordsCounter\WordsCounter.csproj">
+      <Project>{7ba7b304-12fc-4414-b602-c45d4200f597}</Project>
+      <Name>WordsCounter</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

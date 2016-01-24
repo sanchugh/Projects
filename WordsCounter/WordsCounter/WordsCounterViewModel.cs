@@ -16,29 +16,41 @@ namespace WordsCounter
             BuildCommands();
         }
 
-        private void BuildCommands()
+        public void BuildCommands()
         {
-            CheckDuplicateWords = new DelegateCommand<string>(x => CheckDuplicates());
+            CheckDuplicateWords = new DelegateCommand<string>(x => CheckDuplicates(), x => CanExecute(x));
         }
 
-        private void CheckDuplicates()
+        public bool CanExecute(string str)
+        {
+            if(string.IsNullOrWhiteSpace(Sentence))
+            {
+                OutputText = string.Empty;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public void CheckDuplicates()
         {
             try
             {
-                if(string.IsNullOrWhiteSpace(Sentence))
+                var counter = new Counter();
+                var result = counter.CountWords(Sentence);
+
+                if(result.Count !=0)
                 {
-                    OutputText = "\n Input sentence is blank, please enter sentence";
+                    StringBuilder output = new StringBuilder();
+                    foreach (var item in result)
+                        output.Append(item.Key + " - " + item.Value + "\n");
+
+                    OutputText = output.ToString();
                 }
                 else
                 {
-                    var counter = new Counter();
-                    var result = counter.CountWords(Sentence);
-
-                    StringBuilder output = new StringBuilder();
-                    foreach (var item in result)
-                        output.Append("\n" + item.Key + " - " + item.Value);
-
-                    OutputText = output.ToString();
+                    OutputText = "No valid word found";
                 }
             }
             catch(Exception ex)
@@ -64,7 +76,7 @@ namespace WordsCounter
             }
         }
         /// <summary>
-        /// Output 
+        /// Output (Binded as a simple text to the UI for the simplicity to show it similar to the example however it can be bind to other controls like ListView and GridView)
         /// </summary>
         public string OutputText
         {

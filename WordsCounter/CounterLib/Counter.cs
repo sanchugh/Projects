@@ -38,7 +38,7 @@ namespace CounterLib
 
         private string RemoveSpecialChar(string sentence)
         {
-            char[] ignoredSpecialChar = new char[] { '.', ',', ';', ':', '?', '!', '"' }; // assuming these special chars not part of word, these can be added or removed based on the fact which one author want to consider part of the word, can be configured  
+            char[] ignoredSpecialChar = new char[] { '.', ',', ';', ':', '?', '!', '"','\r','\n' }; // assuming these special chars not part of word, these can be added or removed based on the fact which one author want to consider part of the word, can be configured  
             foreach (char sp in ignoredSpecialChar)
             {
                 if (sentence.Contains(sp))

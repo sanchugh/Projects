@@ -22,15 +22,15 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="70" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
         <Label Grid.Row="0" Grid.Column="0" Content="Input: "/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="SentenceTextBox" Text="{Binding Sentence}"/>
-        <Button Grid.Row="0" Grid.Column="2" Margin="25,1,25,1" Content="Check Duplicates" Command="{Binding CheckDuplicateWords}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="SentenceTextBox" Text="{Binding Sentence, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap"/>
+        <Button Grid.Row="0" Grid.Column="2" Margin="50,10,50,10" Content="Check Duplicates" Command="{Binding CheckDuplicateWords}"/>
 
         <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Content="Output: "/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding OutputText}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding OutputText}" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
     </Grid>
 </Window>
