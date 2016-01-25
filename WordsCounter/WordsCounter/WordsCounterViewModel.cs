@@ -9,7 +9,7 @@ namespace WordsCounter
     {
         private string _sentence;
         private string _outputText;
-        public DelegateCommand<string> CheckDuplicateWords { get; set; }
+        public DelegateCommand<string> CheckDuplicateWords { get; private set; }
 
         public WordsCounterViewModel()
         {
