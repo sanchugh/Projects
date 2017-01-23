@@ -23,8 +23,8 @@ namespace FundManagement
             BuildCommands();
         }
 
-        private decimal _inputQuantity;
-        public decimal InputQuantity
+        private string _inputQuantity;
+        public string InputQuantity
         {
             get { return _inputQuantity; }
             set {
@@ -33,8 +33,8 @@ namespace FundManagement
             }
         }
 
-        private decimal _inputPrice;
-        public decimal InputPrice
+        private string _inputPrice;
+        public string InputPrice
         {
             get { return _inputPrice; }
             set { _inputPrice = value; OnPropertyChanged(); }
@@ -68,19 +68,24 @@ namespace FundManagement
 
         private void Add()
         {
-            AddStock(SelectedStockType, InputPrice, InputQuantity);
+            AddStock(SelectedStockType, Convert.ToDecimal(InputPrice), Convert.ToDecimal(InputQuantity));
         }
 
         public bool CanExecute(string str)
         {
-            if (InputPrice != 0 && InputQuantity != 0 )
+            if (!String.IsNullOrEmpty(InputPrice) && !string.IsNullOrEmpty(InputQuantity))
             {
-                return true;
+                decimal price;
+                var priceResult = decimal.TryParse(InputPrice, out price);
+
+                decimal quantity;
+                var priceQuantity = decimal.TryParse(InputQuantity, out quantity);
+                if (priceResult && priceQuantity && Convert.ToDecimal(InputPrice) != 0 && Convert.ToDecimal(InputQuantity) != 0)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         
         public void AddStock(StockType stocktype, decimal price, decimal quantity)
